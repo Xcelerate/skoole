@@ -4,6 +4,10 @@
 
 @import 'application.scss';
 
+#new-book.overlay {
+	cursor: auto;
+}
+
 /* FORM */
 
 #book-form {
@@ -38,6 +42,7 @@
 /* LISTS */
 
 div#lists {
+    height: 100%;
 	text-shadow: 0px 1px 0px #fff;
 	div.section {
 		width: 450px;
@@ -55,7 +60,7 @@ div#lists {
 		}
 		div.list {
 			div.entry {
-				padding: 20px 12px;
+                padding: 22px 4px;
 				border-top: dotted 1px #ccc;
 				&:nth-child(odd) {
 					background-color: rgba(0, 0, 0, 0.03);
@@ -64,8 +69,11 @@ div#lists {
 					border-bottom: dotted 1px #ccc;
 				}
 				img {
-					float: right;
-					padding: 4px;
+					float: left;
+                    height: 70px;
+                    margin-top: -13px;
+                    padding: 0 12px 0 8px;
+                    
 				}
 				div {
 					display: inline-block;

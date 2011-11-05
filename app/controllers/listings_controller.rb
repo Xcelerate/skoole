@@ -72,12 +72,14 @@ class ListingsController < ApplicationController
                 @seller_listing = Listing.where("book_id = ? AND pending = ? AND kind = 'Sell' AND price <= ? AND condition <= ? AND id < ?",
                     @listing.book_id, false, @listing.price, @listing.condition, @listing.id
                 ).order('created_at ASC').first
+                @latest_entry = current_user.listings.where(:kind => 'Buy').last
             else
                 @seller = current_user
                 @seller_listing = @listing
                 @buyer_listing = Listing.where("book_id = ? AND pending = ? AND kind = 'Buy' AND price >= ? AND condition >= ? AND id < ?",
                     @listing.book_id, false, @listing.price, @listing.condition, @listing.id
                 ).order('created_at ASC').first
+                @latest_entry = current_user.listings.where(:kind => 'Sell').last
             end
             
             if @buyer_listing && @seller_listing
@@ -127,12 +129,12 @@ class ListingsController < ApplicationController
                 receiver = Contact.new('Ryan', @buyer.email, @buyer.phone)
                 message = Message.new(sender, receiver, @t)
 
-                sms_response = Nexmo.send(message)
-                puts sender.inspect, receiver.inspect
-                puts sms_response.body, sms_response.code, sms_response.message, sms_response.headers.inspect
+                #sms_response = Nexmo.send(message)
+                #puts sender.inspect, receiver.inspect
+                #puts sms_response.body, sms_response.code, sms_response.message, sms_response.headers.inspect
 
-                email_response = Sendgrid.send(message)
-                puts email_response.body, email_response.code, email_response.message, email_response.headers.inspect
+                #email_response = Sendgrid.send(message)
+                #puts email_response.body, email_response.code, email_response.message, email_response.headers.inspect
                
             else
                 
